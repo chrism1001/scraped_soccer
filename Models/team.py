@@ -1,23 +1,23 @@
 class Team:
     def __init__(self,
                  team_name,
-                 record,
-                 home_record,
-                 away_record,
-                 league_position,
-                 goals,
+                 rank,
+                 games,
+                 wins,
+                 ties,
+                 losses,
+                 goals_for,
                  goals_against,
-                 diff,
-                 next_match,
-                 logo):
+                 goals_diff,
+                 attendance_per_game):
         self.team_name = team_name
-        self.record = record
-        self.home_record = home_record
-        self.away_record = away_record
-        self.league_position = league_position
-        self.goals = goals
+        self.rank = rank,
+        self.games = games
+        self.wins = wins
+        self.ties = ties
+        self.losses = losses
+        self.goals_for = goals_for
         self.goals_against = goals_against
-        self.diff = diff
-        self.next_match = next_match
-        self.logo = logo
+        self.goals_diff = goals_diff
+        self.attendance_per_game = attendance_per_game
         
