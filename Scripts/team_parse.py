@@ -60,10 +60,8 @@ def insert_team_data(soup, team_id):
 pages = 0
 with open("./Data/teams.txt", "r") as file:
     for url in file:
-        print(url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
-        print(soup)
         
         team_id = url.split("/")[5]
         
