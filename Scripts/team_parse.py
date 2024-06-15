@@ -1,8 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-from supabase import create_client, Client
+from supabase import create_client
 from dotenv import load_dotenv
+import re
+import time
 
 load_dotenv()
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
@@ -11,8 +13,13 @@ supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 data, count = supabase.table("Teams").delete().neq("id", 0).execute()
 
-def insert_team_stats(data, conf):
-    team_stats = data.find_all("tr")
+def insert_team_data(soup, team_id):
+    team_logo = soup.find("img", class_="teamlogo")["src"]
+    team_conf = soup.find("span", id=re.compile("ern-Conference_overall"))["data-label"].split(",")[0]
+    
+    team_overall_stats = soup.find("table", id=re.compile("ern-Conference_overall"))
+    
+    team_stats = team_overall_stats.find_all("tr")
     
     for team_stat in team_stats:
         team_name = team_stat.find("a", href=True)
@@ -30,7 +37,10 @@ def insert_team_stats(data, conf):
         team_attendance_per_game = team_stat.find("td", attrs={"data-stat": "attendance_per_g"}).text.strip()
         team_attendance_per_game = team_attendance_per_game.replace(",", "")
         
+        print(f"{team_name} {team_rank}")
+        
         data, count = supabase.table("Teams").insert({
+            "id": str(team_id),
             "team_name": str(team_name),
             "games": int(team_games),
             "wins": int(team_wins),
@@ -41,16 +51,27 @@ def insert_team_stats(data, conf):
             "goals_diff": int(team_goal_diff),
             "attendance_per_game": int(team_attendance_per_game),
             "rank": int(team_rank),
-            "conf": str(conf)
+            "conf": str(team_conf),
+            "team_logo": str(team_logo)
         }).execute()
-    
-
-with open("./Data/mls.txt", "r") as url:
-    response = requests.get(url.read())
-    soup = BeautifulSoup(response.text, "html.parser")
-    
-    eastern_data = soup.find(id="results2024221Eastern-Conference_overall")
-    insert_team_stats(eastern_data, "Eastern")
         
-    western_data = soup.find(id="results2024221Western-Conference_overall")
-    insert_team_stats(western_data, "Western")
+        break
+
+pages = 0
+with open("./Data/teams.txt", "r") as file:
+    for url in file:
+        print(url)
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        print(soup)
+        
+        team_id = url.split("/")[5]
+        
+        insert_team_data(soup, team_id)
+        
+        pages += 1
+        if pages == 10:
+            time.sleep(60)
+            pages = 0
+        
+        
