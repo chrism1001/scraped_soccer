@@ -19,7 +19,7 @@ def insert_team_data(soup, team_id):
     
     team_overall_stats = soup.find("table", id=re.compile("ern-Conference_overall"))
     
-    team_stats = team_overall_stats.find_all("tr")
+    team_stats = team_overall_stats.find_all("tr", class_="hilite bold")
     
     for team_stat in team_stats:
         team_name = team_stat.find("a", href=True)
