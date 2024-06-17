@@ -37,8 +37,6 @@ def insert_team_data(soup, team_id):
         team_attendance_per_game = team_stat.find("td", attrs={"data-stat": "attendance_per_g"}).text.strip()
         team_attendance_per_game = team_attendance_per_game.replace(",", "")
         
-        print(f"{team_name} {team_rank}")
-        
         data, count = supabase.table("Teams").insert({
             "id": str(team_id),
             "team_name": str(team_name),
