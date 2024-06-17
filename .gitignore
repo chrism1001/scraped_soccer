@@ -1,6 +1,7 @@
 /venv
 .env
 *_pycache__
+.env.local
 
 # Logs
 *logs
