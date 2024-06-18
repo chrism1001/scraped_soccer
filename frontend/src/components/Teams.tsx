@@ -13,6 +13,8 @@ function Teams() {
         fetchTeams()
     }, [])
 
+    console.log(teams)
+
     return (
         <>
             <div>
