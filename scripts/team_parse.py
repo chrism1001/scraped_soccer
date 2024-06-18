@@ -56,7 +56,7 @@ def insert_team_data(soup, team_id):
         break
 
 pages = 0
-with open("./Data/teams.txt", "r") as file:
+with open("./data/teams.txt", "r") as file:
     for url in file:
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
