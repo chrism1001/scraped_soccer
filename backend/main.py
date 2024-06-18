@@ -9,7 +9,9 @@ from dotenv import load_dotenv
 app = FastAPI()
 load_dotenv()
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
+print(SUPABASE_URL)
 SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY")
+print(SUPABASE_ANON_KEY)
 supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 BASE_DIR = Path(__file__).resolve().parent
