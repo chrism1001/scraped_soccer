@@ -5,6 +5,7 @@ import os
 from supabase import create_client
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 app.add_middleware(
@@ -21,6 +22,7 @@ SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY")
 supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 BASE_DIR = Path(__file__).resolve().parent
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory=str(Path(BASE_DIR, "templates")))
 
 @app.get("/")
