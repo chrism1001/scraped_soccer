@@ -17,4 +17,15 @@ For this project I wanted to apply what I learn using new languages and framewor
 
 ## Project Setup
 
+```
+|-backend ------------- contains fastapi apis and templates for rendering
+|
+|-data ---------------- contains txt files with links to data
+|   |-teams.txt
+|
+|-frontend ------------ contains react react project files
+|
+|-scripts ------------- contains script for downloading team stats daily
+```
+
 ## How to Install
