@@ -22,7 +22,7 @@ SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY")
 supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 BASE_DIR = Path(__file__).resolve().parent
-app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+app.mount("/assets", StaticFiles(directory=str(Path(BASE_DIR, "templates/assets"))), name="assets")
 templates = Jinja2Templates(directory=str(Path(BASE_DIR, "templates")))
 
 @app.get("/")
