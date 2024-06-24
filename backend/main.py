@@ -38,3 +38,31 @@ async def get_teams():
     except Exception as e:
         print(f"Error: {e}")
         return {"message": "Error."}
+    
+@app.get("/get_teams_eastern")
+async def get_teams():
+    try:
+        data, count = supabase.from_("Teams")\
+            .select("*")\
+            .eq("conf", "Eastern Conference")\
+            .order("rank", desc=False)\
+            .execute()
+            
+        return { "data": data[1] }
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "Error."}
+    
+@app.get("/get_teams_western")
+async def get_teams():
+    try:
+        data, count = supabase.from_("Teams")\
+            .select("*")\
+            .eq("conf", "Western Conference")\
+            .order("rank", desc=False)\
+            .execute()
+            
+        return { "data": data[1] }
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "Error."}
