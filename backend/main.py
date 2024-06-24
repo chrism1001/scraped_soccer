@@ -23,7 +23,7 @@ supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
 BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(Path(BASE_DIR, "templates")))
 
-@app.get("/")
+@app.get(".")
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
