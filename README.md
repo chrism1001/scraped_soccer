@@ -23,7 +23,7 @@ For this project I wanted to apply what I learn using new languages and framewor
 |-data ---------------- contains txt files with links to data
 |   |-teams.txt
 |
-|-frontend ------------ contains react react project files
+|-frontend ------------ contains react project files and tests
 |
 |-scripts ------------- contains script for downloading team stats daily
 ```
