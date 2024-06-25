@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import TeamCard from "./TeamCard";
+import TeamModal from "./TeamModal";
 
 function Teams() {
     const [easternTeams, setEasternTeams] = useState([])
     const [westernTeams, setWesternTeams] = useState([])
+    const [showModal, setShowModal] = useState(false);
+    const [teamModal, setTeamModal] = useState([])
 
     const fetchWesternTeams = async () => {
         const response = await fetch(`http://localhost:8000/get_teams_eastern`)
@@ -28,7 +31,7 @@ function Teams() {
                 <h1 className="text-black font-mono m-10 text-2xl">Eastern Conference</h1>
                 <div className="grid grid-cols-3">
                     {easternTeams.map((team: any, index: any) => (
-                        <div key={index} data-modal-target="static-modal" data-modal-toggle="static-modal" className="block max-w-[18rem] rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+                        <div key={index} onClick={() => { setShowModal(true); setTeamModal(team)}} className="block max-w-[18rem] rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                             <TeamCard data={team} />
                         </div>
                     ))}
@@ -38,12 +41,19 @@ function Teams() {
                 <h1 className="text-black font-mono m-10 text-2xl">Western Conference</h1>
                 <div className="grid grid-cols-3">
                     {westernTeams.map((team: any, index: any) => (
-                        <div key={index} data-modal-target="static-modal" data-modal-toggle="static-modal" className="block max-w-[18rem] rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+                        <div key={index} onClick={() => { setShowModal(true); setTeamModal(team)}} className="block max-w-[18rem] rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                             <TeamCard data={team} />
                         </div>
                     ))}
                 </div>
             </div>
+
+            {showModal ? (
+                <>
+                    <TeamModal data={teamModal}/>
+                </>
+            ) : null}
+
         </div>
     )
 }
