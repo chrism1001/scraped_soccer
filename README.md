@@ -16,6 +16,7 @@ For this project I wanted to apply what I learn using new languages and framewor
 * Heroku for hosting.
 
 ## Project Demo
+![demo](https://i.imgur.com/uijvuvV.gif)
 
 ## Project Setup
 
