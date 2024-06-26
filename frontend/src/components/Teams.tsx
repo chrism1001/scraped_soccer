@@ -50,7 +50,7 @@ function Teams() {
 
             {showModal ? (
                 <>
-                    <TeamModal data={teamModal}/>
+                    <TeamModal data={teamModal} stateChanger={setShowModal}/>
                 </>
             ) : null}
 
