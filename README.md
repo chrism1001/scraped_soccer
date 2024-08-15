@@ -30,5 +30,3 @@ For this project I wanted to apply what I learn using new languages and framewor
 |
 |-scripts ------------- contains script for downloading team stats daily
 ```
-
-## How to Install
